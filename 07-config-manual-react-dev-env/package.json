@@ -1,0 +1,12 @@
+{
+  "name": "07-config-manual-react-dev-env",
+  "version": "1.0.0",
+  "description": "웹팩으로 리액트 개발 환경을 설정해보자.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "sosoYim",
+  "license": "ISC"
+}
