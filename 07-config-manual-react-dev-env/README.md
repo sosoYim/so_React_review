@@ -88,28 +88,30 @@
 
 > 웹팩은 Javascript 어플리케이션을 위한 모듈 번들러다. 웹팩을 실행시키면 한 개 이상의 entry point 부터 의존성 그래프를 그린 후 사용자의 설정에 따라 하나 이상의 번들들로 압축한다.
 
-- 기본 개념
+1. 기본 개념
 
-  - Entry
-    - 번들링의 진입점. 기본값 : `./src/index.js`
-  - Output
-    - 번들을 뱉어낼 위치 및 파일명 .기본값 : `./dist/main.js`
-    - { path, filename }
-  - Loaders
-  - Plugins
-  - Mode
-  - Browser Compatibility
+   - Entry
+     - 번들링의 진입점. 기본값 : `./src/index.js`
+   - Output
+     - 번들을 뱉어낼 위치 및 파일명 .기본값 : `./dist/main.js`
+     - { path, filename }
+   - Loaders
+   - Plugins
+   - Mode
+   - Browser Compatibility
 
-- 기본 세팅
-  - webpack
-  - webpack-cli
-  - webpack-dev-server
-- Loader
-  - babel-loader : 바벨과 웹팩을 이용해 JavaScript를 트랜스파일링 해주는 패키지. 웹팩 설정을 참고하여 로더로 지정해주어야 한다. 옵션으로 바벨 presets, plugins 들을 배열 형태로 지정할 수 있다.
-- 설정 파일
-  - dev
-  - server
-  - build
+2. 설치
+   - 기본 세팅
+     - webpack
+     - webpack-cli
+     - webpack-dev-server
+   - Loader
+     - babel-loader : 바벨과 웹팩을 이용해 JavaScript를 트랜스파일링 해주는 패키지. 웹팩 설정을 참고하여 로더로 지정해주어야 한다. 옵션으로 바벨 presets, plugins 들을 배열 형태로 지정할 수 있다.
+3. 설정
+   - 설정 파일
+     - dev
+     - server
+     - build
 
 #### eslint
 
@@ -118,20 +120,34 @@
 
 > eslint는 자바스크립트 린팅 유틸리티로, 문법적인 오류는 아니지만 작성하는데 준수해야할 가이드라인에 어긋난 경우를 분석한다. `.eslintrc.{js,yml,json}` 파일에 구체적인 설정을 해줄 수 있다.
 
-- Plugins
-  - 기본적인 가이드라인 외에 다른 특정한 규칙들을 npm module로 배포해 놓은 것이다.
-  - (eslint-plugin-플러그인이름)
-- Shareable configs
+1. 구성요소에 대한 개념
 
-  - 플러그인, rules 등에 대한 설정을 통으로 만들어 npm에 배포된 것이다.
-  - (eslint-config-이름)
-  - 배열 형태로 지정되는데 config 사이에 겹쳐지는 rules가 있다면 뒤에 호출된 것이 덮어쓴다.
+   - Plugins
+     - 기본적인 가이드라인 외에 다른 특정한 규칙들을 npm module로 배포해 놓은 것이다.
+     - (eslint-plugin-플러그인이름)
+   - Shareable configs
 
-- 설정 파일
-  - "plugins" : 배열 형태로 등록한 플러그인들을 지정한다.
-  - "extends" : 적용시킬 config 패키지들을 배열 형태로 지정한다. 설치한 플러그인이 권장하는 rules를 적용시키도 싶다면 (예를 들어 react) `plugin:react/recommended` 형식으로 지정해주면 된다.
-  - "rules" : off, warn, error 세 단계로 지정할 수 있다. 세부적인 규칙을 통제할 때 사용한다.
-  - "overrides" 키에 rules 키를 덮을 파일,규칙 설정
+     - 플러그인, rules 등에 대한 설정을 통으로 만들어 npm에 배포된 것이다.
+     - (eslint-config-이름)
+     - 배열 형태로 지정되는데 config 사이에 겹쳐지는 rules가 있다면 뒤에 호출된 것이 덮어쓴다.
+
+2. 설정
+   - "plugins" : 배열 형태로 등록한 플러그인들을 지정한다.
+   - "extends" : 적용시킬 config 패키지들을 배열 형태로 지정한다. 설치한 플러그인이 권장하는 rules를 적용시키도 싶다면 (예를 들어 react) `plugin:react/recommended` 형식으로 지정해주면 된다.
+   - "rules" : off, warn, error 세 단계로 지정할 수 있다. 세부적인 규칙을 통제할 때 사용한다.
+   - "overrides" 키에 rules 키를 덮을 파일,규칙 설정
+
+#### prettier
+
+> Prettier is an opinionated code formatter with support for: Javascript, JSX, TypeScript, CSS, ...
+
+1. prettier VS lint
+   - Prettier for **formatting** (max-len, no-mixed-spaces-and-tabs, keyword-spacing, comma-style…) and **linters** (no-unused-vars, no-extra-bind, no-implicit-globals, prefer-promise-reject-errors…) for catching bugs!
+2. 설정
+   - npm install --save-dev --save-exact prettier
+   - .prettierrc.json, .prettierignore
+   - eslint-config-prettier : ESLint와 함께 동작할 수 있도록
+   - "Run Prettier from your editor for the best experienc."
 
 #### 바벨
 
