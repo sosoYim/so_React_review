@@ -3,22 +3,39 @@
   "version": "1.0.0",
   "description": "웹팩으로 리액트 개발 환경을 설정해보자.",
   "main": "index.js",
+  "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "npm run serve -- --open",
+    "serve": "webpack serve --config webpack/config.server.js",
+    "bundle": "webpack --config webpack/config.dev.js",
+    "build": "webpack --config webpack/config.build.js",
+    "test": "",
+    "clear": ""
   },
-  "keywords": [],
+  "keywords": [
+    "webpack",
+    "react",
+    "babel"
+  ],
   "author": "sosoYim",
   "license": "ISC",
-  "dependencies": {},
+  "dependencies": {
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
+  },
   "devDependencies": {
     "@babel/cli": "^7.16.0",
     "@babel/core": "^7.16.5",
     "@babel/preset-env": "^7.16.5",
     "@babel/preset-react": "^7.16.5",
+    "babel-loader": "^8.2.3",
     "eslint": "^8.5.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-jsx-a11y": "^6.5.1",
     "eslint-plugin-react": "^7.28.0",
-    "prettier": "^2.5.1"
+    "prettier": "^2.5.1",
+    "webpack": "^5.65.0",
+    "webpack-cli": "^4.9.1",
+    "webpack-dev-server": "^4.7.1"
   }
 }
