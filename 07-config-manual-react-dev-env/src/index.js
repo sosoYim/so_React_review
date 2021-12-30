@@ -1,7 +1,7 @@
 import React from 'react';
 import { render } from 'react-dom';
-import { App } from './components';
+import { RandomCountUpContainer } from './container/RandomCountUpContainer/RandomCountUpContainer';
 
 const rootNode = document.querySelector('#root');
 
-render(<App />, rootNode);
+render(<RandomCountUpContainer />, rootNode);

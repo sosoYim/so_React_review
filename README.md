@@ -4,7 +4,109 @@
 
 ## 주로 사용되는 노드 패키지
 
-### 1. 바벨
+```
+"devDependencies": {
+  "@babel/core": "^7.16.0",
+  "@babel/preset-env": "^7.16.4",
+  "@babel/preset-react": "^7.16.0",
+  "babel-loader": "^8.2.3",
+  "eslint": "^8.4.0",
+  "eslint-config-prettier": "^8.3.0",
+  "eslint-plugin-jsx-a11y": "^6.5.1",
+  "eslint-plugin-prettier": "^4.0.0",
+  "eslint-plugin-react": "^7.27.1",
+  "prettier": "^2.5.1",
+  "webpack": "^5.64.4",
+  "webpack-cli": "^4.9.1",
+  "webpack-dev-server": "^4.6.0"
+},
+"dependencies": {
+  "react": "^17.0.2",
+  "react-dom": "^17.0.2"
+}
+```
+
+### 1. react
+
+> 리액트를 사용하기 위한 패키지들. 배포시에도 필요하다.
+
+- react : 리액트 라이브러리의 엔트리 포인트 (top level API)
+- react-dom : 돔과 관련된 메서드
+
+#### 2. 웹팩
+
+> 웹팩은 Javascript 어플리케이션을 위한 모듈 번들러다. 웹팩을 실행시키면 한 개 이상의 entry point 부터 의존성 그래프를 그린 후 사용자의 설정에 따라 하나 이상의 번들들로 압축한다. [시작 가이드](https://webpack.js.org/guides/getting-started/)
+
+2-1. 기본 개념
+
+- Entry
+  - 번들링의 진입점. 기본값 : `./src/index.js`
+- Output
+  - 번들을 뱉어낼 위치 및 파일명 .기본값 : `./dist/main.js`
+  - { path, filename }
+- Loaders
+- Plugins
+- Mode
+- Browser Compatibility
+
+2-2. 설치
+
+- 기본 세팅
+  - webpack
+  - webpack-cli
+  - webpack-dev-server
+- Loader
+  - babel-loader : 바벨과 웹팩을 이용해 JavaScript를 트랜스파일링 해주는 패키지. 웹팩 설정을 참고하여 로더로 지정해주어야 한다. 옵션으로 바벨 presets, plugins 들을 배열 형태로 지정할 수 있다.
+    options 안에 넣어줄 것을 로더만을 위한 별개의 설정파일에 담아줄 수도 있다. (07폴더의 .babelrc.js 와 config.dev.js의 babel-loader 부분 참고)
+
+2-3. 설정
+
+- 설정 파일
+  - dev
+  - server
+  - build
+
+### 3. eslint
+
+[공홈 설정 가이드](https://eslint.org/docs/user-guide/configuring/)
+[prateeksurana 블로그](https://prateeksurana.me/blog/difference-between-eslint-extends-and-plugins/)
+
+> eslint는 자바스크립트 린팅 유틸리티로, 문법적인 오류는 아니지만 작성하는데 준수해야할 가이드라인에 어긋난 경우를 분석한다. `.eslintrc.{js,yml,json}` 파일에 구체적인 설정을 해줄 수 있다.
+
+3-1. 구성요소에 대한 개념
+
+- Plugins
+  - 기본적인 가이드라인 외에 다른 특정한 규칙들을 npm module로 배포해 놓은 것이다.
+  - (eslint-plugin-플러그인이름)
+- Shareable configs
+
+  - 플러그인, rules 등에 대한 설정을 통으로 만들어 npm에 배포된 것이다.
+  - (eslint-config-이름)
+  - 배열 형태로 지정되는데 config 사이에 겹쳐지는 rules가 있다면 뒤에 호출된 것이 덮어쓴다.
+
+3-2. 설정
+
+- "plugins" : 배열 형태로 등록한 플러그인들을 지정한다.
+- "extends" : 적용시킬 config 패키지들을 배열 형태로 지정한다. 설치한 플러그인이 권장하는 rules를 적용시키도 싶다면 (예를 들어 react) `plugin:react/recommended` 형식으로 지정해주면 된다.
+- "rules" : off, warn, error 세 단계로 지정할 수 있다. 세부적인 규칙을 통제할 때 사용한다.
+- "overrides" 키에 rules 키를 덮을 파일,규칙 설정
+
+### 4. prettier
+
+> Prettier is an opinionated code formatter with support for: Javascript, JSX, TypeScript, CSS, ...
+
+4-1. prettier VS lint
+
+- Prettier for **formatting** (max-len, no-mixed-spaces-and-tabs, keyword-spacing, comma-style…) and **linters** (no-unused-vars, no-extra-bind, no-implicit-globals, prefer-promise-reject-errors…) for catching bugs!
+
+4-2. 설정
+
+- npm install --save-dev --save-exact prettier
+- .prettierrc.json, .prettierignore
+- eslint-config-prettier : ESLint와 함께 동작할 수 있도록
+- "Run Prettier from your editor for the best experienc."
+
+### 5. 바벨
 
 > 바벨은 자바스크립트 트랜스파일러다. 대표적으로 ECMAScript 2015+ 코드를 구 버전 브라우저에서 범용적으로 사용할 수 있게 해준다. 공홈에 나온 대표적인 기능들은 다음과 같다. [설치 가이드](https://babeljs.io/docs/en/usage#basic-usage-with-cli)
 
@@ -24,25 +126,3 @@
   - preset에 대한 더 구체적인 설정을 원한다면 babel.config.json 파일을 생성하여 설정해준다.
 
 - (+추가 노트) 만약 CDN을 사용한다면 : 기존에 많이 사용하던 @babel/polyfill은 deprecated 되었다. 이젠 바벨 폴리필이 하던 두 역할이 나눠진 것을 따로 불러와야 한다. core-js/stable (to polyfill ECMAScript features) and regenerator-runtime/runtime (needed to use transpiled generator functions)
-
-### 2. ESLint
-
-[공홈 설정 가이드](https://eslint.org/docs/user-guide/configuring/)
-[prateeksurana 블로그](https://prateeksurana.me/blog/difference-between-eslint-extends-and-plugins/)
-
-> eslint는 자바스크립트 린팅 유틸리티로, 문법적인 오류는 아니지만 작성하는데 준수해야할 가이드라인에 어긋난 경우를 분석한다. `.eslintrc.{js,yml,json}` 파일에 구체적인 설정을 해줄 수 있다.
-
-- Plugins
-  - 기본적인 가이드라인 외에 다른 특정한 규칙들을 npm module로 배포해 놓은 것이다.
-  - (eslint-plugin-플러그인이름)
-- Shareable configs
-
-  - 플러그인, rules 등에 대한 설정을 통으로 만들어 npm에 배포된 것이다.
-  - (eslint-config-이름)
-  - 배열 형태로 지정되는데 config 사이에 겹쳐지는 rules가 있다면 뒤에 호출된 것이 덮어쓴다.
-
-- 설정 파일
-  - "plugins" : 배열 형태로 등록한 플러그인들을 지정한다.
-  - "extends" : 적용시킬 config 패키지들을 배열 형태로 지정한다. 설치한 플러그인이 권장하는 rules를 적용시키도 싶다면 (예를 들어 react) `plugin:react/recommended` 형식으로 지정해주면 된다.
-  - "rules" : off, warn, error 세 단계로 지정할 수 있다. 세부적인 규칙을 통제할 때 사용한다.
-  - "overrides" 키에 rules 키를 덮을 파일,규칙 설정
