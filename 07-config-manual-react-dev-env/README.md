@@ -1,6 +1,7 @@
 # Random Count Up 제작 및 React 앱 개발 환경 메뉴얼 구성
 
 > '랜덤 카운트 업' 앱을 생성하고 웹팩으로 리액트 개발 환경을 설정해보자.
+> 수업 중 클래스 컴퍼넌트 + 상태가 없었던 것을 함수형 컴퍼넌트 + Hooks를 이용한 상태관리 버전으로 리팩토링 해보자.
 
 - Initialization Git & NPM
 - Webpack, Webpack Dever Server

@@ -5,19 +5,21 @@ import { RandomCountUpApp } from '../../components';
 
 // let count = 0;
 
-export function RandomCountUpContainer() {
+export function RandomCountUpContainer({ MIN, MAX }) {
   const [count, setCount] = useState(0);
   const [isComplete, setIsComplete] = useState(count === TARGET);
+  const [TARGET, setTARGET] = useState(() => getRandomMinMax(MIN, MAX));
+  // const [TARGET, setTARGET] = useState(null);
 
-  const MIN = 0;
-  const MAX = 30;
-  const TARGET = getRandomMinMax(MIN, MAX);
-
+  // // Hooks를 일반 함수 안에 넣으면 안됨 !
   const animate = () => {
     if (!isComplete) {
+      // TODO: yamoo9 count가 Target 보다 1이 큰 상태에서 멈춤
+      setIsComplete(count === TARGET);
       setCount((cnt) => cnt + 1);
       console.log('nope');
-      window.requestAnimationFrame(animate);
+      // TODO: yamoo9 requestAnimationFrame 재귀를 useEffect내에서 어떻게 사용할까요?
+      // window.requestAnimationFrame(animate);
     } else {
       console.log('completed');
       return;
@@ -25,17 +27,24 @@ export function RandomCountUpContainer() {
     console.log({ count, TARGET, isComp: count === TARGET });
   };
 
-  settings.setDocumentTitle(`${TARGET} 랜덤 카운트 업 앱!`);
-  settings.clickDocumentReloadBrowser();
   useEffect(() => {
-    setIsComplete(count === TARGET);
-    // FIX: 무한 반복 중
-    // animate();
-  }, [count, isComplete]);
+    animate();
+  });
+
+  // componentDidMount
+  useEffect(() => {
+    settings.clickDocumentReloadBrowser();
+    console.log('target', TARGET);
+    settings.setDocumentTitle(`${TARGET} 랜덤카운트 시작`);
+  }, []);
+
   return <RandomCountUpApp count={count} isComplete={isComplete} />;
 }
-// RandomCountUpContainer.defaultProps = {
-//   MIN: 0,
-//   MAX: 30,
-//   TARGET: getRandomMinMax(MIN, MAX),
-// };
+
+RandomCountUpContainer.defaultProps = {
+  MIN: 0,
+  MAX: 30,
+  // get TARGET() {
+  //   return getRandomMinMax(this.MIN, this.MAX);
+  // },
+};
