@@ -125,4 +125,4 @@
 
   - preset에 대한 더 구체적인 설정을 원한다면 babel.config.json 파일을 생성하여 설정해준다.
 
-- (+추가 노트) 만약 CDN을 사용한다면 : 기존에 많이 사용하던 @babel/polyfill은 deprecated 되었다. 이젠 바벨 폴리필이 하던 두 역할이 나눠진 것을 따로 불러와야 한다. core-js/stable (to polyfill ECMAScript features) and regenerator-runtime/runtime (needed to use transpiled generator functions)
+- (+추가 노트) 만약 CDN을 사용한다면 : 기존에 많이 사용하던 @babel/polyfill은 deprecated 되었다. 이젠 바벨 폴리필이 하던 것을 두 역할이 나눠진 것을 따로 불러와야 한다. core-js/stable (to polyfill ECMAScript features) and regenerator-runtime/runtime (needed to use transpiled generator functions)
